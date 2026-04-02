@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../../../../../../source/repos/zone.bankconnector.moniepoint/src/zone.bankconnector.moniepoint/zone.bankconnector.moniepoint.csproj" />
+  <Project Path="../../../../../../source/repos/zone.bankconnector.moniepoint/test/zone.bankconnector.moniepoint.Tests/zone.bankconnector.moniepoint.Tests.csproj" />
+</Solution>
