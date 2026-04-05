@@ -12,12 +12,11 @@ using zone.bankconnector.moniepoint.Utilities;
 
 namespace zone.bankconnector.moniepoint.Services
 {
-   
     public class MonieTransferService : IMonieTransferService
     {
-        private readonly IHttpClientService           _http;
-        private readonly TeamAptOptions               _options;
-        private readonly EncryptionServiceFactory     _encryption;
+        private readonly IHttpClientService            _http;
+        private readonly TeamAptOptions                _options;
+        private readonly IEncryptionServiceFactory     _encryption;
         private readonly ILogger<MonieTransferService> _logger;
 
         private static readonly JsonSerializerOptions JsonOpts = new()
@@ -30,7 +29,7 @@ namespace zone.bankconnector.moniepoint.Services
         public MonieTransferService(
             IHttpClientService             http,
             IOptions<TeamAptOptions>       options,
-            EncryptionServiceFactory       encryption,
+            IEncryptionServiceFactory      encryption,
             ILogger<MonieTransferService>  logger)
         {
             _http       = http;

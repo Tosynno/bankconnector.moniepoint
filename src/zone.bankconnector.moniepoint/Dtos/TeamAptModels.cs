@@ -182,13 +182,13 @@ namespace zone.bankconnector.moniepoint.Dtos
     }
 
 
-    internal class EncryptedRequestEnvelope
+    public class EncryptedRequestEnvelope
     {
         [JsonPropertyName("request")]
         public string Request { get; set; } = string.Empty;
     }
 
-    internal class EncryptedResponseEnvelope
+    public class EncryptedResponseEnvelope
     {
         [JsonPropertyName("statusCode")]
         public string StatusCode { get; set; } = string.Empty;

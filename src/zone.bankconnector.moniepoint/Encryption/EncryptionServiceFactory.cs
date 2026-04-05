@@ -5,31 +5,32 @@ using zone.bankconnector.moniepoint.Utilities;
 
 namespace zone.bankconnector.moniepoint.Encryption
 {
-    public sealed class EncryptionServiceFactory
+    public class EncryptionServiceFactory : IEncryptionServiceFactory
     {
         private readonly TeamAptOptions _options;
         private readonly ILogger<EncryptionServiceFactory> _logger;
+        private readonly string _wwwRootPath;
 
         private IEncryptionService? _cached;
         private readonly object _lock = new();
 
         public EncryptionServiceFactory(
             IOptions<TeamAptOptions> options,
-            ILogger<EncryptionServiceFactory> logger)
+            ILogger<EncryptionServiceFactory> logger,
+            IWebHostEnvironment env)
         {
-            _options = options.Value;
-            _logger  = logger;
+            _options     = options.Value;
+            _logger      = logger;
+            _wwwRootPath = env.WebRootPath;
         }
 
-        public IEncryptionService GetService()
+        public virtual IEncryptionService GetService()
         {
             if (_cached is not null) return _cached;
 
             lock (_lock)
             {
                 if (_cached is not null) return _cached;
-
-                var isPgpFlag = _options.IsPgp?.Trim().ToUpperInvariant();
 
                 _logger.LogInformation(
                     "TeamApt IsPgp flag = '{Flag}' → resolved mode = {Mode}",
@@ -54,45 +55,41 @@ namespace zone.bankconnector.moniepoint.Encryption
 
         private PgpEncryptionService CreatePgpService()
         {
-            AssertKeyPath(_options.PgpTeamAptPublicKeyPath,
-                "Credentials:PgpTeamAptPublicKeyPath",
-                "Download TeamApt's PGP public key: portal → Encryption Keys → Public Key (Legacy PGP) → DOWNLOAD");
+            var pubPath  = _options.ResolveKeyPath(_options.PgpTeamAptPublicKeyPath,  _wwwRootPath);
+            var privPath = _options.ResolveKeyPath(_options.PgpInstitutionPrivateKeyPath, _wwwRootPath);
 
-            AssertKeyPath(_options.PgpInstitutionPrivateKeyPath,
-                "Credentials:PgpInstitutionPrivateKeyPath",
-                "Your institution's PGP private key. Upload matching public key via portal → UPLOAD YOUR PUBLIC PGP KEY");
+            AssertKeyPath(pubPath,  "Credentials:PgpTeamAptPublicKeyPath");
+            AssertKeyPath(privPath, "Credentials:PgpInstitutionPrivateKeyPath");
 
             return new PgpEncryptionService(
-                _options.PgpTeamAptPublicKeyPath!,
-                _options.PgpInstitutionPrivateKeyPath!,
+                pubPath!,
+                privPath!,
                 _options.PgpInstitutionPrivateKeyPassphrase);
         }
 
         private RsaEncryptionService CreateRsaService()
         {
-            AssertKeyPath(_options.RsaTeamAptPublicKeyPath,
-                "Credentials:RsaTeamAptPublicKeyPath",
-                "Download TeamApt's RSA public key: portal → Encryption Keys → RSA Public Key (for ISO20022) → DOWNLOAD");
+            var pubPath  = _options.ResolveKeyPath(_options.RsaTeamAptPublicKeyPath,  _wwwRootPath);
+            var privPath = _options.ResolveKeyPath(_options.RsaInstitutionPrivateKeyPath, _wwwRootPath);
 
-            AssertKeyPath(_options.RsaInstitutionPrivateKeyPath,
-                "Credentials:RsaInstitutionPrivateKeyPath",
-                "Your institution's RSA private key (PEM). Upload matching public key via portal → UPLOAD YOUR PUBLIC RSA KEY");
+            AssertKeyPath(pubPath,  "Credentials:RsaTeamAptPublicKeyPath");
+            AssertKeyPath(privPath, "Credentials:RsaInstitutionPrivateKeyPath");
 
             return new RsaEncryptionService(
-                _options.RsaTeamAptPublicKeyPath!,
-                _options.RsaInstitutionPrivateKeyPath!,
+                pubPath!,
+                privPath!,
                 _options.RsaInstitutionPrivateKeyPassphrase);
         }
 
-        private static void AssertKeyPath(string? path, string setting, string hint)
+        private static void AssertKeyPath(string? path, string setting)
         {
             if (string.IsNullOrWhiteSpace(path))
                 throw new TeamAptEncryptionException(
-                    $"Missing config '{setting}'. Hint: {hint}");
+                    $"Missing config '{setting}'.");
 
             if (!File.Exists(path))
                 throw new TeamAptEncryptionException(
-                    $"Key file not found at '{setting}': {path}");
+                    $"Key file not found for '{setting}': {path}");
         }
     }
 }

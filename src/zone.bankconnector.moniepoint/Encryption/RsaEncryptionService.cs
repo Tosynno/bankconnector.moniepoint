@@ -17,8 +17,8 @@ namespace zone.bankconnector.moniepoint.Encryption
 
         public EncryptionMode Mode => EncryptionMode.RsaIso20022;
 
-        private const int AesKeySize   = 256; 
-        private const int AesBlockSize = 128; 
+        private const int AesKeySize   = 256;
+        private const int AesBlockSize = 128;
 
         public RsaEncryptionService(
             string teamAptPublicKeyPath,
@@ -28,7 +28,6 @@ namespace zone.bankconnector.moniepoint.Encryption
             _teamAptPublicKey      = LoadPublicKeyPem(teamAptPublicKeyPath);
             _institutionPrivateKey = LoadPrivateKeyPem(institutionPrivateKeyPath, privateKeyPassphrase);
         }
-
 
         public string EncryptToHex(string plainJson)
         {
@@ -60,7 +59,6 @@ namespace zone.bankconnector.moniepoint.Encryption
                     "RSA/ISO20022: Failed to decrypt response payload.", ex);
             }
         }
-
 
         private static byte[] HybridEncrypt(byte[] plainData, RSA rsaPublicKey)
         {
@@ -102,8 +100,8 @@ namespace zone.bankconnector.moniepoint.Encryption
             var aesKey = rsaPrivateKey.Decrypt(
                 reader.ReadBytes(keyLen), RSAEncryptionPadding.OaepSHA256);
 
-            var iv           = reader.ReadBytes(16);
-            var aesCipher    = reader.ReadBytes(
+            var iv        = reader.ReadBytes(16);
+            var aesCipher = reader.ReadBytes(
                 (int)(reader.BaseStream.Length - reader.BaseStream.Position));
 
             using var aes    = Aes.Create();
@@ -114,7 +112,7 @@ namespace zone.bankconnector.moniepoint.Encryption
             aes.Key          = aesKey;
             aes.IV           = iv;
 
-            using var msOut    = new MemoryStream();
+            using var msOut     = new MemoryStream();
             using var decryptor = aes.CreateDecryptor();
             using (var cs = new CryptoStream(msOut, decryptor, CryptoStreamMode.Write))
             {
@@ -123,7 +121,6 @@ namespace zone.bankconnector.moniepoint.Encryption
             }
             return msOut.ToArray();
         }
-
 
         private static RSA LoadPublicKeyPem(string pemPath)
         {
@@ -142,8 +139,8 @@ namespace zone.bankconnector.moniepoint.Encryption
 
             var rsaParams = keyObj switch
             {
-                RsaKeyParameters kp                  => kp,
-                AsymmetricCipherKeyPair pair         => (RsaKeyParameters)pair.Public,
+                RsaKeyParameters kp          => kp,
+                AsymmetricCipherKeyPair pair => (RsaKeyParameters)pair.Public,
                 _ => throw new TeamAptEncryptionException(
                     $"RSA: Unexpected PEM type {keyObj?.GetType().Name} in {pemPath}")
             };

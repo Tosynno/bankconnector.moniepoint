@@ -24,7 +24,6 @@ namespace zone.bankconnector.moniepoint.Encryption
             _institutionPrivateKey = LoadPrivateKey(institutionPrivateKeyPath, privateKeyPassphrase);
         }
 
-
         public string EncryptToHex(string plainJson)
         {
             try
@@ -50,7 +49,6 @@ namespace zone.bankconnector.moniepoint.Encryption
                 throw new TeamAptEncryptionException("PGP: Failed to decrypt response payload.", ex);
             }
         }
-
 
         private static byte[] PgpEncrypt(byte[] plainData, PgpPublicKey publicKey)
         {
@@ -111,7 +109,6 @@ namespace zone.bankconnector.moniepoint.Encryption
             throw new TeamAptEncryptionException("PGP: No encrypted data list found in message.");
         }
 
-
         private static PgpPublicKey LoadPublicKey(string path)
         {
             using var fs     = File.OpenRead(path);
@@ -140,7 +137,6 @@ namespace zone.bankconnector.moniepoint.Encryption
             throw new TeamAptEncryptionException(
                 $"PGP: No suitable private key found in: {path}");
         }
-
 
         private static string BytesToHex(byte[] bytes) => Convert.ToHexString(bytes);
 

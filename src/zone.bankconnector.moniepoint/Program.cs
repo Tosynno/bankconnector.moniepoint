@@ -25,6 +25,8 @@ try
         builder.Configuration.GetSection(TeamAptOptions.SectionName));
 
     builder.Services.AddSingleton<EncryptionServiceFactory>();
+    builder.Services.AddSingleton<IEncryptionServiceFactory>(sp =>
+        sp.GetRequiredService<EncryptionServiceFactory>());
 
     builder.Services.AddTransient<LoggingHandler>();
 
