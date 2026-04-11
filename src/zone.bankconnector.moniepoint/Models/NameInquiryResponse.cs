@@ -19,5 +19,6 @@
         public int? ChannelCode { get; set; }
 
         public int? KYCLevel { get; set; }
+        public string? TransactionReference { get; set; }
     }
 }

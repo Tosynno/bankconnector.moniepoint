@@ -57,6 +57,7 @@ try
         });
 
     builder.Services.AddScoped<IMonieTransferService, MonieTransferService>();
+    builder.Services.AddScoped<IConnector, MonieBankConnector>();
 
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();

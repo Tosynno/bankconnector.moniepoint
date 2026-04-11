@@ -51,6 +51,7 @@ namespace zone.bankconnector.moniepoint.Services
             response.ResponseCode = res.ResponseCode;
             response.Data.ResponseCode= res.ResponseCode;
             response.Data.Status = res.ResponseCode;
+            response.Data.TransactionReference = res.UniqueReference;
             return response;
         }
 
@@ -69,6 +70,7 @@ namespace zone.bankconnector.moniepoint.Services
             response.AccountNumber = res.BeneficiaryAccountNumber;
             response.BVN = res.BeneficiaryBankVerificationNumber;
             response.KYCLevel = Convert.ToInt32(res.BeneficiaryKycLevel);
+            response.TransactionReference = res.UniqueReference;
 
             return response;
         }

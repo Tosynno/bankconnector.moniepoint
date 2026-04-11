@@ -1,7 +1,10 @@
-using System.Text;
 using Org.BouncyCastle.Bcpg;
 using Org.BouncyCastle.Bcpg.OpenPgp;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Security;
+using System.Security.Principal;
+using System.Text;
 using zone.bankconnector.moniepoint.Exceptions;
 using zone.bankconnector.moniepoint.Interfaces;
 using zone.bankconnector.moniepoint.Utilities;
@@ -21,6 +24,11 @@ namespace zone.bankconnector.moniepoint.Encryption
             string? privateKeyPassphrase = null)
         {
             _teamAptPublicKey      = LoadPublicKey(teamAptPublicKeyPath);
+    //        GeneratePgpKeyPair(
+    //"Zone",
+    //privateKeyPassphrase!,
+    //institutionPrivateKeyPath,
+    //institutionPrivateKeyPath);
             _institutionPrivateKey = LoadPrivateKey(institutionPrivateKeyPath, privateKeyPassphrase);
         }
 
@@ -109,6 +117,59 @@ namespace zone.bankconnector.moniepoint.Encryption
             throw new TeamAptEncryptionException("PGP: No encrypted data list found in message.");
         }
 
+        public static void GeneratePgpKeyPair(
+    string identity,
+    string passphrase,
+    string privateKeyPath,
+    string publicKeyPath)
+        {
+            var random = new SecureRandom();
+
+            var rsaGen = new RsaKeyPairGenerator();
+            rsaGen.Init(new KeyGenerationParameters(random, 2048));
+
+            var masterKeyPair = rsaGen.GenerateKeyPair();
+            var encKeyPair = rsaGen.GenerateKeyPair();
+
+            var masterPgpKeyPair = new PgpKeyPair(
+                PublicKeyAlgorithmTag.RsaSign,
+                masterKeyPair,
+                DateTime.UtcNow);
+
+            var encPgpKeyPair = new PgpKeyPair(
+                PublicKeyAlgorithmTag.RsaEncrypt,
+                encKeyPair,
+                DateTime.UtcNow);
+
+            var keyRingGenerator = new PgpKeyRingGenerator(
+                PgpSignature.DefaultCertification,
+                masterPgpKeyPair,
+                identity,
+                SymmetricKeyAlgorithmTag.Aes256,
+                passphrase.ToCharArray(),
+                true,
+                null,
+                null,
+                random);
+
+            keyRingGenerator.AddSubKey(encPgpKeyPair);
+
+            var secretRing = keyRingGenerator.GenerateSecretKeyRing();
+            var publicRing = keyRingGenerator.GeneratePublicKeyRing();
+
+            using (var fs = File.Create(privateKeyPath))
+            using (var armored = new ArmoredOutputStream(fs))
+            {
+                secretRing.Encode(armored);
+            }
+
+            using (var fs = File.Create(publicKeyPath))
+            using (var armored = new ArmoredOutputStream(fs))
+            {
+                publicRing.Encode(armored);
+            }
+        }
+
         private static PgpPublicKey LoadPublicKey(string path)
         {
             using var fs     = File.OpenRead(path);
@@ -125,17 +186,47 @@ namespace zone.bankconnector.moniepoint.Encryption
 
         private static PgpPrivateKey LoadPrivateKey(string path, string? passphrase)
         {
-            using var fs     = File.OpenRead(path);
-            using var decode = PgpUtilities.GetDecoderStream(fs);
-            var bundle       = new PgpSecretKeyRingBundle(decode);
+            using var fs = File.OpenRead(path);
+            using var decoder = PgpUtilities.GetDecoderStream(fs);
+
+            PgpSecretKeyRingBundle bundle;
+
+            try
+            {
+                bundle = new PgpSecretKeyRingBundle(decoder);
+            }
+            catch (IOException ex)
+            {
+                throw new TeamAptEncryptionException(
+                    $"Invalid or unsupported PGP key format. " +
+                    $"Ensure the key is RSA and not ECC/EdDSA.", ex);
+            }
 
             foreach (PgpSecretKeyRing ring in bundle.GetKeyRings())
+            {
                 foreach (PgpSecretKey secret in ring.GetSecretKeys())
-                    if (!secret.IsSigningKey)
-                        return secret.ExtractPrivateKey((passphrase ?? string.Empty).ToCharArray());
+                {
+                    try
+                    {
+                        if (!secret.IsSigningKey)
+                        {
+                            var privateKey = secret.ExtractPrivateKey(
+                                (passphrase ?? string.Empty).ToCharArray());
+
+                            if (privateKey != null)
+                                return privateKey;
+                        }
+                    }
+                    catch
+                    {
+                        // Skip unsupported keys instead of crashing
+                        continue;
+                    }
+                }
+            }
 
             throw new TeamAptEncryptionException(
-                $"PGP: No suitable private key found in: {path}");
+                $"No suitable RSA private key found in: {path}");
         }
 
         private static string BytesToHex(byte[] bytes) => Convert.ToHexString(bytes);

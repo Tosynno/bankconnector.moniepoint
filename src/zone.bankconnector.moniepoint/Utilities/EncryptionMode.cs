@@ -47,7 +47,7 @@ namespace zone.bankconnector.moniepoint.Utilities
             if (string.IsNullOrWhiteSpace(configuredPath))
                 return configuredPath;
 
-            if (!UseWwwRootKeys || Path.IsPathRooted(configuredPath))
+            if (!UseWwwRootKeys && Path.IsPathRooted(configuredPath))
                 return configuredPath;
 
             return Path.Combine(wwwRootPath, configuredPath.TrimStart('/').TrimStart('\\'));
