@@ -1,0 +1,30 @@
+title = "zone Bankconnector Moniepoint - Gitleaks Config"
+
+[extend]
+  useDefault = true
+
+[[allowlists]]
+  description = "Ignore dev config files and test artifacts - global"
+  paths = [
+    '''src/zone\.bankconnector\.moniepoint/appsettings\.json$''',   
+    '''src/.*/appsettings\.json$''',                         
+    '''testEnvironments\.json''',
+    '''local\.settings\.json''',
+    '''appsettings\.Development\.json''',
+    '''appsettings\.Local\.json''',
+    '''appsettings\.json''',
+    '''bin/''',
+    '''obj/''',
+    '''\.vs/''',
+    '''\.vscode/''',
+    '''tests/.*''',
+  ]
+
+[[allowlists]]
+  description = "Ignore known fake/encrypted test auth values"
+  regexes = [
+    '''XemheMeJa66L6gsiRkSQfGdB''',   
+    '''m5ec\+5inFiSEruTbcDbWgGLb''',  
+    '''SxqWxFjOKlui8fVKBIEufsMV''',   
+   
+  ]
