@@ -84,7 +84,7 @@ public class MonieTransferControllerTests
         var actionResult = await controller.Transfer(new TransferRequest
         {
             ToAccount            = "0123456789",
-            AmountToDebit        = 500000,
+            AmountToDebit        = "500000",
             TransactionReference = "APT00015260424FT0001"
         });
 
@@ -107,7 +107,7 @@ public class MonieTransferControllerTests
         var request = new TransferRequest
         {
             ToAccount            = "0123456789",
-            AmountToDebit        = 100000,
+            AmountToDebit        = "100000",
             TransactionReference = "APT00015XYZXYZ123456",
             Narration            = "Rent payment"
         };
@@ -116,7 +116,7 @@ public class MonieTransferControllerTests
 
         Assert.NotNull(captured);
         Assert.Equal("0123456789",           captured!.ToAccount);
-        Assert.Equal(100000L,                captured.AmountToDebit);
+        Assert.Equal("100000",                captured.AmountToDebit.ToString()!);
         Assert.Equal("APT00015XYZXYZ123456", captured.TransactionReference);
         Assert.Equal("Rent payment",         captured.Narration);
     }

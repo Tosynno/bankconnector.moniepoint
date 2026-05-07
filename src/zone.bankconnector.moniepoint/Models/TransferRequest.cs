@@ -18,7 +18,7 @@ namespace zone.bankconnector.moniepoint.Models
 
         [Required(ErrorMessage = "AmountToDebit is required")]
         [Range(1, long.MaxValue, ErrorMessage = "Amount must be positive")]
-        public long? AmountToDebit { get; set; }
+        public string? AmountToDebit { get; set; }
 
         [StringLength(6, MinimumLength = 3, ErrorMessage = "DestinationBankCode must be 3-6 digits")]
         public string? DestinationBankCode { get; set; }

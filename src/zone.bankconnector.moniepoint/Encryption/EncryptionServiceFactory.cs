@@ -64,7 +64,7 @@ namespace zone.bankconnector.moniepoint.Encryption
             return new PgpEncryptionService(
                 pubPath!,
                 privPath!,
-                _options.PgpInstitutionPrivateKeyPassphrase);
+                _options.PgpInstitutionPrivateKeyPassphrase, _options.UseWwwRootKeys);
         }
 
         private RsaEncryptionService CreateRsaService()
@@ -78,7 +78,7 @@ namespace zone.bankconnector.moniepoint.Encryption
             return new RsaEncryptionService(
                 pubPath!,
                 privPath!,
-                _options.RsaInstitutionPrivateKeyPassphrase);
+                _options.RsaInstitutionPrivateKeyPassphrase, _options.UseWwwRootKeys);
         }
 
         private static void AssertKeyPath(string? path, string setting)

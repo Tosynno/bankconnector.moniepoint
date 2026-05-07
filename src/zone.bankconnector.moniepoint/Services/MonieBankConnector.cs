@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder.Extensions;
 using Microsoft.Extensions.Options;
 using Org.BouncyCastle.Ocsp;
+using System.Security.Cryptography.Xml;
 using zone.bankconnector.moniepoint.Dtos;
 using zone.bankconnector.moniepoint.Interfaces;
 using zone.bankconnector.moniepoint.Models;
@@ -16,11 +17,18 @@ namespace zone.bankconnector.moniepoint.Services
         public async Task<GenericResponse<TransferResponse>> IntraBankAsync(TransferRequest request, CancellationToken ct = default)
         {
             GenericResponse<TransferResponse> response = new GenericResponse<TransferResponse>();
+
+            if (string.IsNullOrWhiteSpace(request.TransactionReference))
+            {
+                response.ResponseCode = "01";
+                response.ResponseMessage = "Transaction reference is required.";
+                return response;
+            }
             FundsTransferDto req = new()
             {
                 UniqueReference = request.TransactionReference!,
                 DestinationInstitutionCode = request.DestinationBankCode!,
-                Amount = request.AmountToDebit.ToString()!,
+                Amount = request.AmountToDebit!,
                 NameEnquiryReference = request.NameEnquiryID!,
                 BeneficiaryKycLevel = request.BeneficiaryKYCLevel.ToString()!,
                 BeneficiaryBankVerificationNumber = request.BeneficiaryBVN!,
