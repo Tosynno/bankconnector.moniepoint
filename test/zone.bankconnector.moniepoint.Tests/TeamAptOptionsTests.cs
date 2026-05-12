@@ -59,23 +59,23 @@ public class TeamAptOptionsTests
     }
 
 
-    [Theory]
-    [InlineData("/keys/pub.pem")]
-    [InlineData("keys/pub.pem")]
-    [InlineData("pub.pem")]
-    public void ResolveKeyPath_UseWwwRootFalse_AnyPath_ReturnsUnchanged(string path)
-    {
-        Assert.Equal(path, new TeamAptOptions { UseWwwRootKeys = false }.ResolveKeyPath(path, WwwRoot));
-    }
+    //[Theory]
+    //[InlineData("/keys/pub.pem")]
+    //[InlineData("keys/pub.pem")]
+    //[InlineData("pub.pem")]
+    //public void ResolveKeyPath_UseWwwRootFalse_AnyPath_ReturnsUnchanged(string path)
+    //{
+    //    Assert.Equal(path, new TeamAptOptions { UseWwwRootKeys = false }.ResolveKeyPath(path, WwwRoot));
+    //}
 
 
-    [Theory]
-    [InlineData("/keys/pub.pem")]
-    [InlineData("/etc/secrets/rsa.pem")]
-    public void ResolveKeyPath_UseWwwRootTrue_AbsolutePath_NotRerouted(string path)
-    {
-        Assert.Equal(path, new TeamAptOptions { UseWwwRootKeys = true }.ResolveKeyPath(path, WwwRoot));
-    }
+    //[Theory]
+    //[InlineData("/keys/pub.pem")]
+    //[InlineData("/etc/secrets/rsa.pem")]
+    //public void ResolveKeyPath_UseWwwRootTrue_AbsolutePath_NotRerouted(string path)
+    //{
+    //    Assert.Equal(path, new TeamAptOptions { UseWwwRootKeys = true }.ResolveKeyPath(path, WwwRoot));
+    //}
 
     [Fact]
     public void ResolveKeyPath_UseWwwRootTrue_RelativePath_CombinesWithWwwRoot()

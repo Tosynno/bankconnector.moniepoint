@@ -77,7 +77,7 @@ public class MonieBankConnectorTests
         {
             ToAccount            = "0123456789",
             ToAccountName        = "John Doe",
-            AmountToDebit        = 500000,
+            AmountToDebit        = "500000",
             DestinationBankCode  = "000013",
             TransactionReference = "APT00015260424FT0001",
             NameEnquiryID        = "NE-REF-001",
@@ -107,7 +107,7 @@ public class MonieBankConnectorTests
         await connector.IntraBankAsync(new TransferRequest
         {
             ToAccount            = "0123456789",
-            AmountToDebit        = 100,
+            AmountToDebit        = "100",
             TransactionReference = "APT00015ABCDEF123456"
         });
 
@@ -131,7 +131,7 @@ public class MonieBankConnectorTests
         {
             ToAccount            = "0123456789",
             ToAccountName        = "John Doe",
-            AmountToDebit        = 750000,
+            AmountToDebit        = "750000",
             DestinationBankCode  = "000013",
             TransactionReference = "APT00015260424FT0099",
             NameEnquiryID        = "NE-XYZ",
