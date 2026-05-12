@@ -1,4 +1,31 @@
-<Solution>
-  <Project Path="../src/zone.bankconnector.moniepoint/zone.bankconnector.moniepoint.csproj" />
-  <Project Path="../test/zone.bankconnector.moniepoint.Tests/zone.bankconnector.moniepoint.Tests.csproj" />
-</Solution>
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zone.bankconnector.moniepoint", "zone.bankconnector.moniepoint\zone.bankconnector.moniepoint.csproj", "{61620FD4-97DF-4CC9-8F9E-303B0A91B227}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zone.bankconnector.moniepoint.Tests", "..\test\zone.bankconnector.moniepoint.Tests\zone.bankconnector.moniepoint.Tests.csproj", "{19F9F995-E510-4423-A525-1E249FA2B3AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61620FD4-97DF-4CC9-8F9E-303B0A91B227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61620FD4-97DF-4CC9-8F9E-303B0A91B227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61620FD4-97DF-4CC9-8F9E-303B0A91B227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61620FD4-97DF-4CC9-8F9E-303B0A91B227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19F9F995-E510-4423-A525-1E249FA2B3AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19F9F995-E510-4423-A525-1E249FA2B3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F9F995-E510-4423-A525-1E249FA2B3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19F9F995-E510-4423-A525-1E249FA2B3AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80B74567-2352-460E-B174-41CD3F71D6E5}
+	EndGlobalSection
+EndGlobal
