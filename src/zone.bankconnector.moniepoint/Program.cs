@@ -50,7 +50,7 @@ try
             o.CircuitBreaker.FailureRatio      = 0.5;
             o.CircuitBreaker.MinimumThroughput = 10;
             o.CircuitBreaker.BreakDuration     = TimeSpan.FromSeconds(60);
-            o.Retry.MaxRetryAttempts           = 0;
+            //o.Retry.MaxRetryAttempts           = 0;
             o.Retry.Delay                      = TimeSpan.FromSeconds(1);
             o.Retry.BackoffType                = DelayBackoffType.Exponential;
             o.Retry.UseJitter                  = true;
