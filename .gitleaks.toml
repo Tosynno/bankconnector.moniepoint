@@ -6,8 +6,8 @@ title = "zone Bankconnector Moniepoint - Gitleaks Config"
 [[allowlists]]
   description = "Ignore dev config files and test artifacts - global"
   paths = [
-    '''src/zone\.bankconnector\.moniepoint/appsettings\.json$''',   
-    '''src/.*/appsettings\.json$''',                         
+    '''src/zone\.bankconnector\.moniepoint/appsettings\.json$''',
+    '''src/.*/appsettings\.json$''',
     '''testEnvironments\.json''',
     '''local\.settings\.json''',
     '''appsettings\.Development\.json''',
@@ -23,8 +23,14 @@ title = "zone Bankconnector Moniepoint - Gitleaks Config"
 [[allowlists]]
   description = "Ignore known fake/encrypted test auth values"
   regexes = [
-    '''XemheMeJa66L6gsiRkSQfGdB''',   
-    '''m5ec\+5inFiSEruTbcDbWgGLb''',  
-    '''SxqWxFjOKlui8fVKBIEufsMV''',   
-   
+    '''XemheMeJa66L6gsiRkSQfGdB''',
+    '''m5ec\+5inFiSEruTbcDbWgGLb''',
+    '''SxqWxFjOKlui8fVKBIEufsMV''',
+  ]
+
+[[allowlists]]
+  description = "Ignore committed encryption key files used at runtime"
+  paths = [
+    '''src/zone\.bankconnector\.moniepoint/wwwroot/keys/zone-pgp-private\.asc$''',
+    '''src/zone\.bankconnector\.moniepoint/wwwroot/keys/zone_rsa_private\.pem$''',
   ]
