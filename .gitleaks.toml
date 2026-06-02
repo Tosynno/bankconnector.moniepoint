@@ -1,4 +1,4 @@
-title = "zone Bankconnector Moniepoint - Gitleaks Config"
+title = "Bankconnector Moniepoint - Gitleaks Config"
 
 [extend]
   useDefault = true
@@ -6,7 +6,7 @@ title = "zone Bankconnector Moniepoint - Gitleaks Config"
 [[allowlists]]
   description = "Ignore dev config files and test artifacts - global"
   paths = [
-    '''src/zone\.bankconnector\.moniepoint/appsettings\.json$''',
+    '''src/TSN\.bankconnector\.moniepoint/appsettings\.json$''',
     '''src/.*/appsettings\.json$''',
     '''testEnvironments\.json''',
     '''local\.settings\.json''',
@@ -31,6 +31,6 @@ title = "zone Bankconnector Moniepoint - Gitleaks Config"
 [[allowlists]]
   description = "Ignore committed encryption key files used at runtime"
   paths = [
-    '''src/zone\.bankconnector\.moniepoint/wwwroot/keys/zone-pgp-private\.asc$''',
-    '''src/zone\.bankconnector\.moniepoint/wwwroot/keys/zone_rsa_private\.pem$''',
+    '''src/TSN\.bankconnector\.moniepoint/wwwroot/keys/zone-pgp-private\.asc$''',
+    '''src/TSN\.bankconnector\.moniepoint/wwwroot/keys/zone_rsa_private\.pem$''',
   ]

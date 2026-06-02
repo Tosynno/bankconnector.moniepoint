@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="../src/zone.bankconnector.moniepoint/zone.bankconnector.moniepoint.csproj" />
   <Project Path="../test/zone.bankconnector.moniepoint.Tests/zone.bankconnector.moniepoint.Tests.csproj" />
+  <Project Path="zone.bankconnector.moniepoint/bankconnector.moniepoint.csproj" />
 </Solution>
