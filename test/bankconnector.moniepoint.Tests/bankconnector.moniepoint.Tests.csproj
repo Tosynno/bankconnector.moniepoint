@@ -22,7 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\zone.bankconnector.moniepoint\zone.bankconnector.moniepoint.csproj" />
+	  <ProjectReference Include="..\..\src\bankconnector.moniepoint\bankconnector.moniepoint.csproj" />
 	</ItemGroup>
 
   <ItemGroup>
