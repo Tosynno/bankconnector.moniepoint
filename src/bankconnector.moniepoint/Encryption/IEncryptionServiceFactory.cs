@@ -1,6 +1,6 @@
-using zone.bankconnector.moniepoint.Interfaces;
+using bankconnector.moniepoint.Interfaces;
 
-namespace zone.bankconnector.moniepoint.Encryption
+namespace bankconnector.moniepoint.Encryption
 {
     public interface IEncryptionServiceFactory
     {

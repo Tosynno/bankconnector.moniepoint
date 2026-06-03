@@ -1,6 +1,6 @@
-﻿using zone.bankconnector.moniepoint.Models;
+﻿using bankconnector.moniepoint.Models;
 
-namespace zone.bankconnector.moniepoint.Interfaces
+namespace bankconnector.moniepoint.Interfaces
 {
     public interface IConnector
     {

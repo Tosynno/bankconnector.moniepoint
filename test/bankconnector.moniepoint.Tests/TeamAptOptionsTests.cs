@@ -1,6 +1,6 @@
-using zone.bankconnector.moniepoint.Utilities;
+using bankconnector.moniepoint.Utilities;
 
-namespace zone.bankconnector.moniepoint.Tests;
+namespace bankconnector.moniepoint.Tests;
 
 public class TeamAptOptionsTests
 {

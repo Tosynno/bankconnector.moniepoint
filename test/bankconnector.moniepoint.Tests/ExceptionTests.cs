@@ -1,6 +1,6 @@
-using zone.bankconnector.moniepoint.Exceptions;
+using bankconnector.moniepoint.Exceptions;
 
-namespace zone.bankconnector.moniepoint.Tests;
+namespace bankconnector.moniepoint.Tests;
 
 public class ExceptionTests
 {

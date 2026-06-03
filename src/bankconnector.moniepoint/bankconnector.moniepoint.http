@@ -1,0 +1,6 @@
+@bankconnector.moniepoint_HostAddress = http://localhost:5152
+
+GET {{bankconnector.moniepoint_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

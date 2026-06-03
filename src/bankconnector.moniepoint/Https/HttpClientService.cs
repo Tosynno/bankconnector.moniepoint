@@ -1,10 +1,10 @@
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using zone.bankconnector.moniepoint.Dtos;
-using zone.bankconnector.moniepoint.Exceptions;
+using bankconnector.moniepoint.Dtos;
+using bankconnector.moniepoint.Exceptions;
 
-namespace zone.bankconnector.moniepoint.Https
+namespace bankconnector.moniepoint.Https
 {
     public class HttpClientService : IHttpClientService
     {

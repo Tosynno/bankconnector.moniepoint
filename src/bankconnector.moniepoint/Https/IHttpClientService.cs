@@ -1,4 +1,4 @@
-namespace zone.bankconnector.moniepoint.Https
+namespace bankconnector.moniepoint.Https
 {
     public interface IHttpClientService
     {

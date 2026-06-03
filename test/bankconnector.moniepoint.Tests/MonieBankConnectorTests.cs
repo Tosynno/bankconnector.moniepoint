@@ -1,14 +1,14 @@
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Moq;
-using zone.bankconnector.moniepoint.Dtos;
-using zone.bankconnector.moniepoint.Interfaces;
-using zone.bankconnector.moniepoint.Models;
-using zone.bankconnector.moniepoint.Services;
-using zone.bankconnector.moniepoint.Tests.Fixtures;
-using zone.bankconnector.moniepoint.Utilities;
+using bankconnector.moniepoint.Dtos;
+using bankconnector.moniepoint.Interfaces;
+using bankconnector.moniepoint.Models;
+using bankconnector.moniepoint.Services;
+using bankconnector.moniepoint.Tests.Fixtures;
+using bankconnector.moniepoint.Utilities;
 
-namespace zone.bankconnector.moniepoint.Tests;
+namespace bankconnector.moniepoint.Tests;
 
 public class MonieBankConnectorTests
 {

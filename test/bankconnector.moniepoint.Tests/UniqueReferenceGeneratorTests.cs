@@ -1,6 +1,6 @@
-using zone.bankconnector.moniepoint.Helpers;
+using bankconnector.moniepoint.Helpers;
 
-namespace zone.bankconnector.moniepoint.Tests;
+namespace bankconnector.moniepoint.Tests;
 
 public class UniqueReferenceGeneratorTests
 {

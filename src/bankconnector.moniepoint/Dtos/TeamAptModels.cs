@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace zone.bankconnector.moniepoint.Dtos
+namespace bankconnector.moniepoint.Dtos
 {
 
     public class NameEnquiryDto

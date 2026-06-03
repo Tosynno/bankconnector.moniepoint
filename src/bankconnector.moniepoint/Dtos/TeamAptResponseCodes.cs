@@ -1,4 +1,4 @@
-namespace zone.bankconnector.moniepoint.Dtos
+namespace bankconnector.moniepoint.Dtos
 {
     public static class TeamAptResponseCodes
     {

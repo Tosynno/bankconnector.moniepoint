@@ -1,4 +1,4 @@
-﻿namespace zone.bankconnector.moniepoint.Models
+﻿namespace bankconnector.moniepoint.Models
 {
     public class NameInquiryResponse : BaseResponse
     {

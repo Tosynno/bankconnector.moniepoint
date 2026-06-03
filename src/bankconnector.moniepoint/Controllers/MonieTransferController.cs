@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using zone.bankconnector.moniepoint.Interfaces;
-using zone.bankconnector.moniepoint.Models;
+using bankconnector.moniepoint.Interfaces;
+using bankconnector.moniepoint.Models;
 
-namespace zone.bankconnector.moniepoint.Controllers
+namespace bankconnector.moniepoint.Controllers
 {
     [ApiController]
     //[Route("api/v1/transfer")]

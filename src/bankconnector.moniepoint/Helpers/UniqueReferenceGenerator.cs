@@ -1,4 +1,4 @@
-namespace zone.bankconnector.moniepoint.Helpers
+namespace bankconnector.moniepoint.Helpers
 {
     public static class UniqueReferenceGenerator
     {

@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
-using zone.bankconnector.moniepoint.Controllers;
-using zone.bankconnector.moniepoint.Interfaces;
-using zone.bankconnector.moniepoint.Models;
+using bankconnector.moniepoint.Controllers;
+using bankconnector.moniepoint.Interfaces;
+using bankconnector.moniepoint.Models;
 
-namespace zone.bankconnector.moniepoint.Tests;
+namespace bankconnector.moniepoint.Tests;
 
 public class MonieTransferControllerTests
 {

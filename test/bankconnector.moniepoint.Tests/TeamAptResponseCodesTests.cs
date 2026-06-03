@@ -1,6 +1,6 @@
-using zone.bankconnector.moniepoint.Dtos;
+using bankconnector.moniepoint.Dtos;
 
-namespace zone.bankconnector.moniepoint.Tests;
+namespace bankconnector.moniepoint.Tests;
 
 public class TeamAptResponseCodesTests
 {

@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
-using zone.bankconnector.moniepoint.Encryption;
-using zone.bankconnector.moniepoint.Exceptions;
-using zone.bankconnector.moniepoint.Tests.Fixtures;
-using zone.bankconnector.moniepoint.Utilities;
-using MockFactory = zone.bankconnector.moniepoint.Tests.Fixtures.MockFactory;
+using bankconnector.moniepoint.Encryption;
+using bankconnector.moniepoint.Exceptions;
+using bankconnector.moniepoint.Tests.Fixtures;
+using bankconnector.moniepoint.Utilities;
+using MockFactory = bankconnector.moniepoint.Tests.Fixtures.MockFactory;
 
-namespace zone.bankconnector.moniepoint.Tests;
+namespace bankconnector.moniepoint.Tests;
 
 public class EncryptionServiceFactoryTests : IDisposable
 {

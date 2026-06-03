@@ -2,15 +2,15 @@ using Microsoft.Extensions.Options;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using zone.bankconnector.moniepoint.Dtos;
-using zone.bankconnector.moniepoint.Encryption;
-using zone.bankconnector.moniepoint.Exceptions;
-using zone.bankconnector.moniepoint.Helpers;
-using zone.bankconnector.moniepoint.Https;
-using zone.bankconnector.moniepoint.Interfaces;
-using zone.bankconnector.moniepoint.Utilities;
+using bankconnector.moniepoint.Dtos;
+using bankconnector.moniepoint.Encryption;
+using bankconnector.moniepoint.Exceptions;
+using bankconnector.moniepoint.Helpers;
+using bankconnector.moniepoint.Https;
+using bankconnector.moniepoint.Interfaces;
+using bankconnector.moniepoint.Utilities;
 
-namespace zone.bankconnector.moniepoint.Services
+namespace bankconnector.moniepoint.Services
 {
     public class MonieTransferService : IMonieTransferService
     {

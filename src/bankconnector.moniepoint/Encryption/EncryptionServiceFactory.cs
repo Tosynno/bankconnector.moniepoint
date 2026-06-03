@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Options;
-using zone.bankconnector.moniepoint.Exceptions;
-using zone.bankconnector.moniepoint.Interfaces;
-using zone.bankconnector.moniepoint.Utilities;
+using bankconnector.moniepoint.Exceptions;
+using bankconnector.moniepoint.Interfaces;
+using bankconnector.moniepoint.Utilities;
 
-namespace zone.bankconnector.moniepoint.Encryption
+namespace bankconnector.moniepoint.Encryption
 {
     public class EncryptionServiceFactory : IEncryptionServiceFactory
     {

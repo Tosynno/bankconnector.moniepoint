@@ -1,8 +1,8 @@
 
 
-using zone.bankconnector.moniepoint.Dtos;
+using bankconnector.moniepoint.Dtos;
 
-namespace zone.bankconnector.moniepoint.Interfaces
+namespace bankconnector.moniepoint.Interfaces
 {
     public interface IMonieTransferService
     {

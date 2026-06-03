@@ -3,16 +3,16 @@ using System.Text.Json;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Moq;
-using zone.bankconnector.moniepoint.Dtos;
-using zone.bankconnector.moniepoint.Exceptions;
-using zone.bankconnector.moniepoint.Https;
-using zone.bankconnector.moniepoint.Interfaces;
-using zone.bankconnector.moniepoint.Services;
-using zone.bankconnector.moniepoint.Tests.Fixtures;
-using zone.bankconnector.moniepoint.Utilities;
-using MockFactory = zone.bankconnector.moniepoint.Tests.Fixtures.MockFactory;
+using bankconnector.moniepoint.Dtos;
+using bankconnector.moniepoint.Exceptions;
+using bankconnector.moniepoint.Https;
+using bankconnector.moniepoint.Interfaces;
+using bankconnector.moniepoint.Services;
+using bankconnector.moniepoint.Tests.Fixtures;
+using bankconnector.moniepoint.Utilities;
+using MockFactory = bankconnector.moniepoint.Tests.Fixtures.MockFactory;
 
-namespace zone.bankconnector.moniepoint.Tests;
+namespace bankconnector.moniepoint.Tests;
 
 public class MonieTransferServiceTests
 {

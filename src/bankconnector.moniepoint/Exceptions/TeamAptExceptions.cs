@@ -1,4 +1,4 @@
-namespace zone.bankconnector.moniepoint.Exceptions
+namespace bankconnector.moniepoint.Exceptions
 {
     public class TeamAptEncryptionException : Exception
     {

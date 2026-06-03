@@ -1,12 +1,12 @@
 using NLog;
 using NLog.Web;
 using Polly;
-using zone.bankconnector.moniepoint.Encryption;
-using zone.bankconnector.moniepoint.Https;
-using zone.bankconnector.moniepoint.Https.Handlers;
-using zone.bankconnector.moniepoint.Interfaces;
-using zone.bankconnector.moniepoint.Services;
-using zone.bankconnector.moniepoint.Utilities;
+using bankconnector.moniepoint.Encryption;
+using bankconnector.moniepoint.Https;
+using bankconnector.moniepoint.Https.Handlers;
+using bankconnector.moniepoint.Interfaces;
+using bankconnector.moniepoint.Services;
+using bankconnector.moniepoint.Utilities;
 using Microsoft.Extensions.Options;
 
 var logger = LogManager.Setup()

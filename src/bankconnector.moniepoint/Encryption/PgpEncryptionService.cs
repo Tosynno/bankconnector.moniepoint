@@ -4,11 +4,11 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Security;
 using System.Text;
-using zone.bankconnector.moniepoint.Exceptions;
-using zone.bankconnector.moniepoint.Interfaces;
-using zone.bankconnector.moniepoint.Utilities;
+using bankconnector.moniepoint.Exceptions;
+using bankconnector.moniepoint.Interfaces;
+using bankconnector.moniepoint.Utilities;
 
-namespace zone.bankconnector.moniepoint.Encryption
+namespace bankconnector.moniepoint.Encryption
 {
     public sealed class PgpEncryptionService : IEncryptionService
     {

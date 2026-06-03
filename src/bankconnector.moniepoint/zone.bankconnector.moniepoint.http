@@ -1,6 +1,0 @@
-@zone.bankconnector.moniepoint_HostAddress = http://localhost:5152
-
-GET {{zone.bankconnector.moniepoint_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

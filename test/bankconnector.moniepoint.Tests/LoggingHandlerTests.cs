@@ -1,9 +1,9 @@
 using System.Net;
 using System.Text;
 using Microsoft.Extensions.Logging.Abstractions;
-using zone.bankconnector.moniepoint.Https.Handlers;
+using bankconnector.moniepoint.Https.Handlers;
 
-namespace zone.bankconnector.moniepoint.Tests;
+namespace bankconnector.moniepoint.Tests;
 
 public class LoggingHandlerTests
 {

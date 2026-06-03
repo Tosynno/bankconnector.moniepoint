@@ -1,4 +1,4 @@
-namespace zone.bankconnector.moniepoint.Utilities
+namespace bankconnector.moniepoint.Utilities
 {
     public enum EncryptionMode
     {

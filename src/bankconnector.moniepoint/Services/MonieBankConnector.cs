@@ -2,12 +2,12 @@
 using Microsoft.Extensions.Options;
 using Org.BouncyCastle.Ocsp;
 using System.Security.Cryptography.Xml;
-using zone.bankconnector.moniepoint.Dtos;
-using zone.bankconnector.moniepoint.Interfaces;
-using zone.bankconnector.moniepoint.Models;
-using zone.bankconnector.moniepoint.Utilities;
+using bankconnector.moniepoint.Dtos;
+using bankconnector.moniepoint.Interfaces;
+using bankconnector.moniepoint.Models;
+using bankconnector.moniepoint.Utilities;
 
-namespace zone.bankconnector.moniepoint.Services
+namespace bankconnector.moniepoint.Services
 {
     public class MonieBankConnector(IMonieTransferService monieTransferService, ILogger<MonieBankConnector> logger, IOptions<TeamAptOptions> aptOptions) : IConnector
     {

@@ -1,7 +1,7 @@
-using zone.bankconnector.moniepoint.Dtos;
-using zone.bankconnector.moniepoint.Models;
+using bankconnector.moniepoint.Dtos;
+using bankconnector.moniepoint.Models;
 
-namespace zone.bankconnector.moniepoint.Tests;
+namespace bankconnector.moniepoint.Tests;
 
 public class DtoTests
 {

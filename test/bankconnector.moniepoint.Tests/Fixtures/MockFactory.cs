@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
-using zone.bankconnector.moniepoint.Encryption;
-using zone.bankconnector.moniepoint.Https;
-using zone.bankconnector.moniepoint.Interfaces;
-using zone.bankconnector.moniepoint.Utilities;
+using bankconnector.moniepoint.Encryption;
+using bankconnector.moniepoint.Https;
+using bankconnector.moniepoint.Interfaces;
+using bankconnector.moniepoint.Utilities;
 
-namespace zone.bankconnector.moniepoint.Tests.Fixtures;
+namespace bankconnector.moniepoint.Tests.Fixtures;
 
 internal static class MockFactory
 {
