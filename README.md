@@ -1,120 +1,91 @@
-Moniepoint FT Integration — Full Configuration & Security
-Guide
-This guide documents all required configuration for the Moniepoint / TeamApt FT integration, including:
-• PGP configuration
-• RSA configuration (legacy/optional)
-• Environment-variable secret management
-• appsettings.json structure
-• Docker deployment examples
-• Security hardening recommendations
-1. Recommended appsettings.json
-{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning"
-    }
-  },
-  "AllowedHosts": "*",
-  "HttpClient": {
-    "TimeoutSeconds": 40
-  },
-  "Credentials": {
-    "BaseUrl":
-      "https://aptpay-account-transfer.switch-staging.teamapt.com/eft/v1",
-    "ApiKey": "",
-    "UniqueReferencePrefix": "APT00015",
-    "UseWwwRootKeys": false,
-    "TimeoutSeconds": 30,
-    "ReQueryDelaySeconds": 10,
-    "MaxReQueryAttempts": 36,
-    "GLAccountName": "Simulator",
-    "GLAccountNumber": "11111111111",
-    "GLKycLevel": "1",
-    // =====================================================
-    // PGP CONFIGURATION
-    // =====================================================
-    "PgpTeamAptPublicKeyPath":
-      "MONIEPOINT_PGP_PUBLIC_KEY",
-    "PgpInstitutionPrivateKeyPath":
-      "MONIEPOINT_PGP_PRIVATE_KEY",
-    "PgpInstitutionPrivateKeyPassphrase": "",
-    // =====================================================
-    // RSA CONFIGURATION (OPTIONAL / LEGACY)
-    // =====================================================
-    "RsaTeamAptPublicKeyPath":
-      "MONIEPOINT_RSA_PUBLIC_KEY",
-    "RsaInstitutionPrivateKeyPath":
-      "MONIEPOINT_RSA_PRIVATE_KEY",
-    "RsaInstitutionPrivateKeyPassphrase": ""
-  }
-}
-2. Environment Variables
-# =========================================================
-# API KEY
-# =========================================================
-Credentials__ApiKey=xxxxxxxxxxxxxxxx
-# =========================================================
-# PGP KEYS
-# =========================================================
-MONIEPOINT_PGP_PUBLIC_KEY=-----BEGIN PGP PUBLIC KEY BLOCK----
-...-----END PGP PUBLIC KEY BLOCK----
-MONIEPOINT_PGP_PRIVATE_KEY=-----BEGIN PGP PRIVATE KEY BLOCK----
-...-----END PGP PRIVATE KEY BLOCK----
-Credentials__PgpInstitutionPrivateKeyPassphrase=xxxxxxxx
-# =========================================================
-# RSA KEYS (OPTIONAL / LEGACY)
-# =========================================================
-MONIEPOINT_RSA_PUBLIC_KEY=-----BEGIN PUBLIC KEY----
-...-----END PUBLIC KEY----
-MONIEPOINT_RSA_PRIVATE_KEY=-----BEGIN ENCRYPTED PRIVATE KEY----
-...-----END ENCRYPTED PRIVATE KEY----
-Credentials__RsaInstitutionPrivateKeyPassphrase=xxxxxxxx
-3. Configuration Explanation
-Setting
-Purpose
-UseWwwRootKeys
-PgpTeamAptPublicKeyPath
-false = read keys from environment variables
-Environment variable name holding TeamApt PGP public key
-PgpInstitutionPrivateKeyPath
-RsaTeamAptPublicKeyPath
-RsaInstitutionPrivateKeyPath
-TimeoutSeconds
-ReQueryDelaySeconds
-MaxReQueryAttempts
-UniqueReferencePrefix
-Environment variable name holding institution PGP private key
-Environment variable name holding TeamApt RSA public key
-Environment variable name holding institution RSA private key
-HTTP timeout for TeamApt requests
-Delay between status polls
-36 attempts × 10 seconds = 6-minute SLA
-Transaction reference prefix
-TeamApt API authentication key
-ApiKey
-4. Docker Deployment Example
-docker run -d \
-  -e Credentials__ApiKey="xxxxxxxx" \
-  -e MONIEPOINT_PGP_PUBLIC_KEY="$(cat pgp-public.asc)" \
-  -e MONIEPOINT_PGP_PRIVATE_KEY="$(cat pgp-private.asc)" \
-  -e Credentials__PgpInstitutionPrivateKeyPassphrase="xxxxxxxx" \
-  -e MONIEPOINT_RSA_PUBLIC_KEY="$(cat rsa-public.pem)" \
-  -e MONIEPOINT_RSA_PRIVATE_KEY="$(cat rsa-private.pem)" \
-  -e Credentials__RsaInstitutionPrivateKeyPassphrase="xxxxxxxx" \
-  moniepoint-ftintegration
-5. Security Recommendations
-Issue
-Recommendation
-Keys in wwwroot
-Secrets in appsettings.json
-Retries on transfers
-Do not store keys under wwwroot or static folders
-Use environment variables or a secrets manager
-Disable retries for /ft to avoid duplicate debits
-PII logging
-Time handling
-Random jitter
-Never log full account numbers or decrypted payloads
-Use DateTime.UtcNow instead of DateTime.Now
-Use RandomNumberGenerator instead of Random.Shared
+📌 BankConnector.Moniepoint (.NET 8)
+
+A production-grade reference implementation of a secure bank integration connector service built for fintech systems integrating with MEKS-style payment switches.
+
+This project demonstrates how to build a scalable, secure, and resilient banking integration layer using ASP.NET Core 8.
+
+🚀 What This Project Solves
+
+In fintech systems, direct integration with payment switches often leads to:
+
+Tight coupling with external APIs
+Hardcoded encryption logic
+Fragile retry mechanisms
+Poor observability
+Difficult multi-provider support
+
+This connector abstracts all partner-specific complexity behind a clean, stable API.
+
+🧠 Architecture Overview
+Core Banking System
+        ↓
+Bank Connector API (.NET 8)
+        ↓
+Encryption Layer (RSA / PGP Hybrid)
+        ↓
+HTTP Resilience Layer (Polly)
+        ↓
+MEKS Switch (TeamApt-style integration)
+⚙️ Key Features
+🔐 Dual Encryption Support
+RSA + AES-256 hybrid encryption (ISO 20022 style)
+Legacy PGP encryption support
+Pluggable encryption factory pattern
+🔁 Resilient Transaction Handling
+Polly-based retry & circuit breaker
+Exponential backoff with jitter
+Timeout isolation per request
+🧾 Idempotent Transaction Design
+Unique 32-character reference generation
+Duplicate-safe transfer handling strategy
+📡 Clean API Layer
+Thin controllers
+Fully abstracted business logic via IConnector
+Partner-agnostic design
+📊 Response Normalization
+Standardized internal response model
+MEKS/NIP response code mapping
+🧪 Test Coverage
+Unit tests with xUnit
+Mock-based service isolation
+Encryption round-trip validation
+Reference generation property tests
+📦 API Endpoints
+Method	Endpoint	Description
+POST	/nameinquiry	Resolve account name
+POST	/transfer	Initiate transfer
+GET	/transfer/status	Check transaction status
+🔐 Encryption Modes
+RSA Mode (Recommended)
+AES-256-CBC + RSA-OAEP-SHA256 hybrid encryption
+ISO 20022-aligned structure
+PGP Mode (Legacy)
+BouncyCastle-based encryption
+Backward compatibility for older institutions
+🧪 Testing Strategy
+Controller layer tests (routing validation)
+Service layer tests (business logic)
+Encryption round-trip tests
+Logging safety validation
+Deterministic reference generation tests
+🐳 Deployment
+.NET 8 container-ready
+Docker support included
+Key injection via environment variables / mounted secrets
+Kubernetes-friendly design
+📌 Tech Stack
+ASP.NET Core 8
+Polly (Resilience)
+BouncyCastle (Crypto)
+xUnit + Moq
+NLog (Structured Logging)
+Docker
+💡 Design Principles
+Separation of concerns
+Partner abstraction layer
+Fail-safe transaction design
+Secure-by-default encryption handling
+Stateless API design
+📌 Note
+
+This is a reference implementation built to demonstrate how secure bank connector systems can be designed for fintech integrations.
